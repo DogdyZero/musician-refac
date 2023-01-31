@@ -5,7 +5,8 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.musician.app.cadastro.Usuario;
+import br.com.musician.app.aplicacao.Status;
+import br.com.musician.app.cadastroUsuario.model.Usuario;
 
 public class UsuarioAutenticado implements UserDetails {
 
@@ -30,9 +31,9 @@ public class UsuarioAutenticado implements UserDetails {
 	public String getUsername() {
 		return usuario.getLogin();
 	}
-	
-	public Long getId() {
-		return usuario.getId();
+
+	public String getId() {
+		return usuario.getId().toString();
 	}
 
 	@Override
@@ -52,6 +53,6 @@ public class UsuarioAutenticado implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return usuario.isAtivo();
+		return usuario.getStatus() != null && usuario.getStatus().equals(Status.ATIVO) ? true : false;
 	}
 }
